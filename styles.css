@@ -1,0 +1,600 @@
+:root {
+    /* Светлая тема */
+    --light-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --light-text: #2c3e50;
+    --light-panel: rgba(255, 255, 255, 0.25);
+    --light-shadow: rgba(0, 0, 0, 0.1);
+    
+    /* Тёмная тема */
+    --dark-bg: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    --dark-text: #f0f8ff;
+    --dark-panel: rgba(0, 0, 0, 0.25);
+    --dark-shadow: rgba(0, 0, 0, 0.2);
+    
+    /* Акцентные цвета */
+    --primary-color: #3498db;
+    --secondary-color: #e74c3c;
+    --success-color: #2ecc71;
+    --warning-color: #f1c40f;
+    
+    /* Анимации */
+    --transition-speed: 0.3s;
+    --animation-speed: 0.5s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    transition: background var(--transition-speed),
+                color var(--transition-speed);
+    overflow-x: hidden;
+}
+
+.light-theme {
+    background: var(--light-bg);
+    color: var(--light-text);
+}
+
+.dark-theme {
+    background: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Стеклянный эффект */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.glass-button {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Частицы */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Контейнер */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Шапка */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+}
+
+/* Поиск города */
+.location-selector {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: inherit;
+    font-size: 1rem;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    margin-top: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+}
+/* Погода */
+.weather-display {
+    display: grid;
+    gap: 30px;
+}
+
+.current-weather {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.weather-icon-animated {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-icon-animated i {
+    font-size: 4rem;
+    color: var(--primary-color);
+}
+
+.weather-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detail-item i {
+    color: var(--primary-color);
+}
+
+/* Прогноз */
+.forecast {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.forecast-item {
+    text-align: center;
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: transform var(--transition-speed);
+}
+
+.forecast-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Часы */
+.clock-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.analog-clock {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    background: var(--primary-color);
+}
+
+.hour-hand {
+    width: 4px;
+    height: 30%;
+    border-radius: 4px;
+}
+
+.minute-hand {
+    width: 3px;
+    height: 40%;
+    background: var(--secondary-color);
+}
+
+.second-hand {
+    width: 2px;
+    height: 45%;
+    background: var(--warning-color);
+}
+
+.center-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Графики */
+.chart-container {
+    height: 300px;
+    margin-top: 20px;
+}
+
+/* Настройки */
+.settings-panel {
+    position: fixed;
+    top: 80px;
+    right: -300px;
+    width: 300px;
+    height: calc(100vh - 100px);
+    transition: right var(--transition-speed);
+    z-index: 1000;
+}
+
+.settings-panel.active {
+    right: 20px;
+}
+
+.setting-item {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Переключатели */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: var(--transition-speed);
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: var(--transition-speed);
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Уведомления */
+.notification {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: white;
+    transition: bottom var(--transition-speed);
+    z-index: 2000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.notification.show {
+    bottom: 20px;
+}
+
+/* Анимации */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.rotate {
+    animation: rotate 2s linear infinite;
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.fade-in {
+    animation: fadeIn var(--animation-speed) ease-out;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 1200px) {
+    .container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .forecast {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .current-weather {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .clock-container {
+        flex-direction: column;
+    }
+    
+    .forecast {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .forecast {
+        grid-template-columns: 1fr;
+    }
+    
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+    
+    .settings-panel {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .settings-panel.active {
+        right: 0;
+    }
+}
+
+/* Улучшенные эффекты при наведении */
+.glass-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.37);
+}
+
+.detail-item:hover i {
+    transform: scale(1.2);
+    color: var(--secondary-color);
+}
+
+.search-box input:focus {
+    box-shadow: 0 0 0 2px var(--primary-color);
+    outline: none;
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+.fancy-toggle {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    padding: 5px;
+    position: relative;
+    width: 130px;
+    height: 44px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fancy-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.fancy-toggle:active {
+    transform: translateY(1px);
+}
+
+.toggle-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    z-index: 1;
+    position: relative;
+    color: var(--light-text);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    padding: 0 8px;
+}
+
+.toggle-option i {
+    font-size: 0.9em;
+    transition: transform 0.3s ease;
+}
+
+.toggle-option span {
+    font-size: 0.95em;
+}
+
+.toggle-option.active {
+    color: white;
+    opacity: 1;
+}
+
+.toggle-option.active i {
+    transform: scale(1.1);
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: var(--primary-color);
+    border-radius: 16px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Активные состояния */
+.fancy-toggle[data-active="imperial"] .toggle-slider,
+.fancy-toggle[data-active="12"] .toggle-slider {
+    transform: translateX(calc(100% + 4px));
+}
+
+/* Анимации при наведении */
+.toggle-option:hover i {
+    animation: wiggle 0.5s ease;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-12deg); }
+    75% { transform: rotate(12deg); }
+}
+
+/* Анимация при переключении */
+.toggle-pulse {
+    animation: togglePulse 0.5s ease;
+}
+
+@keyframes togglePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+/* Эффект нажатия */
+.fancy-toggle:active .toggle-slider {
+    transform: scale(0.97);
+}
+
+/* Дополнительные эффекты для темной темы */
+.dark-theme .fancy-toggle {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .toggle-slider {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}

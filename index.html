@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Продвинутый погодный портал с расширенной функциональностью">
+    <title>BSI_WeatherPortal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="light-theme">
+    <div class="particles-container" id="particles-js"></div>
+    
+    <div class="container">
+        <header class="glass-panel">
+            <div class="logo">
+                <i class="fas fa-cloud-sun"></i>
+                <h1>BSI_WeatherPortal</h1>
+            </div>
+            
+            <div class="controls">
+                <button id="theme-toggle" class="glass-button" aria-label="Переключить тему">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="refresh-data" class="glass-button" aria-label="Обновить данные">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <button id="settings-toggle" class="glass-button" aria-label="Настройки">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <section class="weather-widget glass-panel">
+                <div class="location-selector">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="city-input" placeholder="Поиск города...">
+                        <div class="suggestions" id="city-suggestions"></div>
+                    </div>
+                    <button id="geolocation" class="glass-button">
+                        <i class="fas fa-location-dot"></i>
+                    </button>
+                </div>
+
+                <div class="weather-display">
+                    <div class="current-weather">
+                        <div class="weather-icon-animated" id="weather-icon-container">
+                            <i id="weather-icon" class="fas fa-cloud"></i>
+                            <div class="weather-particles"></div>
+                        </div>
+                        <div class="weather-details">
+                            <h2>Погода: <span id="weather-info">Загрузка...</span></h2>
+                            <div class="details-grid">
+                                <div class="detail-item">
+                                    <i class="fas fa-temperature-high"></i>
+                                    <span>Ощущается как: <span id="feels-like"></span></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-tint"></i>
+                                    <span>Влажность: <span id="humidity"></span></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-wind"></i>
+                                    <span>Ветер: <span id="wind-speed"></span></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-compress-arrows-alt"></i>
+                                    <span>Давление: <span id="pressure"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="forecast-container">
+                        <h3>Прогноз на 5 дней</h3>
+                        <div class="forecast" id="forecast-container">
+                            <!-- Прогноз добавляется через JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="time-widget glass-panel">
+                <div class="clock-container">
+                    <div class="analog-clock" id="analog-clock">
+                        <div class="hand hour-hand"></div>
+                        <div class="hand minute-hand"></div>
+                        <div class="hand second-hand"></div>
+                        <div class="center-dot"></div>
+                    </div>
+                    <div class="digital-time">
+                        <h2 id="current-time"></h2>
+                        <p id="current-date"></p>
+                    </div>
+                </div>
+                <div class="world-clock" id="world-clock">
+                    <!-- Мировое время добавляется через JavaScript -->
+                </div>
+            </section>
+
+            <section class="charts-widget glass-panel">
+                <h3>Статистика погоды</h3>
+                <div class="chart-container">
+                    <canvas id="temperature-chart"></canvas>
+                </div>
+            </section>
+        </main>
+
+        <div id="settings-panel" class="settings-panel glass-panel">
+            <h3>Настройки</h3>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <label>Единицы измерения</label>
+                    <div class="fancy-toggle units-toggle" data-active="metric">
+                        <div class="toggle-option" data-value="metric">
+                            <i class="fas fa-temperature-low"></i>
+                            <span>°C</span>
+                        </div>
+                        <div class="toggle-option" data-value="imperial">
+                            <i class="fas fa-temperature-high"></i>
+                            <span>°F</span>
+                        </div>
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <label>Формат времени</label>
+                    <div class="fancy-toggle time-format-toggle" data-active="24">
+                        <div class="toggle-option" data-value="24">
+                            <i class="fas fa-clock"></i>
+                            <span>24</span>
+                        </div>
+                        <div class="toggle-option" data-value="12">
+                            <i class="far fa-clock"></i>
+                            <span>12</span>
+                        </div>
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <label>Звуковые эффекты</label>
+                    <label class="switch">
+                        <input type="checkbox" id="sound-toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>Анимации</label>
+                    <label class="switch">
+                        <input type="checkbox" id="animation-toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+    <audio id="sound-effect" preload="auto"></audio>
+
+    <!-- Подключаем необходимые библиотеки -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
